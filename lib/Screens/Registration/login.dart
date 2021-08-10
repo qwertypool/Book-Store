@@ -145,10 +145,11 @@ class _SignInFormState extends State<SignInForm> {
           size: size,
           text: 'Sign In',
           press: () {
-        if (_formKey.currentState!.validate()) {
-        _formKey.currentState!.save();
+        // if (_formKey.currentState!.validate()) {
+        // _formKey.currentState!.save();
+        
+        //   }
         Navigator.pushNamed(context, SignUpScreen.routeName);
-          }
         },
       ),
       ],
@@ -157,6 +158,8 @@ class _SignInFormState extends State<SignInForm> {
 
   TextFormField buildPasswordField() {
     return TextFormField(
+        cursorColor: Colors.black,
+        cursorHeight: 20,
         obscureText: true,
         decoration: InputDecoration(
           labelText: "Password",
