@@ -22,7 +22,8 @@ class SocalCard extends StatelessWidget {
         height: 45,
         width: 45,
         decoration: BoxDecoration(
-          color: Color(0xFFF5F6F9),
+          // color: Color(0xFFF5F9F9),
+          color: Colors.grey[100],
           shape: BoxShape.circle,
         ),
         child: SvgPicture.asset(icon),
