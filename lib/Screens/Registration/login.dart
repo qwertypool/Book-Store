@@ -1,5 +1,5 @@
 import 'package:book_store/Components/defaultButton.dart';
-import 'package:book_store/Components/socialCart.dart';
+import 'package:book_store/Components/socialCard.dart';
 import 'package:book_store/Screens/Registration/signUp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -19,12 +19,12 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(),
-        title: Text('Sign In',style: TextStyle(fontWeight: FontWeight.w600),),
-        centerTitle: true,
-        toolbarHeight: 100,
-      ),
+      // appBar: AppBar(
+      //   leading: BackButton(),
+      //   title: Text('Sign In',style: TextStyle(fontWeight: FontWeight.w600),),
+      //   centerTitle: true,
+      //   toolbarHeight: 100,
+      // ),
       body: SingleChildScrollView(
         child: Container(
           height: size.height,
@@ -33,17 +33,17 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               children: [
-                SizedBox(height: size.height*0.02,),
+                SizedBox(height: size.height*0.15,),
                 Text(
-                  'Welcome ',
+                  'Sign In ',
                   style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 28,
+                      color: kPrimaryColor,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.5
                       ),
                 ),
-                SizedBox(height: defaultPadding*0.3,),
+                SizedBox(height: defaultPadding*0.5,),
                 Text(
                   'Sign in with email/password \nor continue with social media',
                   textAlign: TextAlign.center,
@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontWeight: FontWeight.w500),
                 
                 ),
-                 SizedBox(height: size.height*0.08,),
+                 SizedBox(height: size.height*0.09,),
                  SignInForm(),
                  //Spacer(flex: 2,),
                  SizedBox(height: size.height*0.07,),
@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                  ),
-                SizedBox(height: defaultPadding*0.5,),
+                SizedBox(height: defaultPadding,),
                 NoAccountText(),
                 Spacer(),
             
@@ -163,7 +163,9 @@ class _SignInFormState extends State<SignInForm> {
         obscureText: true,
         decoration: InputDecoration(
           labelText: "Password",
+          labelStyle: TextStyle(fontWeight: FontWeight.w500,letterSpacing: 1.2,fontSize: 16),
           hintText: "Enter Your Password",
+          hintStyle: TextStyle(fontSize: 15,color: kSecondaryColor.withOpacity(0.95)),
           floatingLabelBehavior: FloatingLabelBehavior.always,
           suffixIcon: Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
@@ -180,7 +182,9 @@ class _SignInFormState extends State<SignInForm> {
         cursorHeight: 20,
         decoration: InputDecoration(
           labelText: "Email",
+          labelStyle: TextStyle(fontWeight: FontWeight.w500,letterSpacing: 1.2,fontSize: 16),
           hintText: "Enter Your Email",
+          hintStyle: TextStyle(fontSize: 15,color: kSecondaryColor.withOpacity(0.95)),
           floatingLabelBehavior: FloatingLabelBehavior.always,
           suffixIcon: Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),

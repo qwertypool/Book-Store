@@ -17,10 +17,10 @@ InputDecorationTheme inputDecorationTheme() {
   OutlineInputBorder outlineInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(30),
     borderSide: BorderSide(color: kTextColor),
-    gapPadding: 10,
+    gapPadding: 2,
   );
   return InputDecorationTheme(
-    contentPadding: EdgeInsets.symmetric(horizontal: 42, vertical: 20),
+    contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
     enabledBorder: outlineInputBorder,
     focusedBorder: outlineInputBorder,
   );

@@ -17,11 +17,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   Widget build(BuildContext context) {
    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Forgot Password",style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
-        centerTitle: true,
-        toolbarHeight: 100,
-      ),
+      // appBar: AppBar(
+      //   title: Text("Forgot Password",style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+      //   centerTitle: true,
+      //   toolbarHeight: 100,
+      // ),
       body: SizedBox(
       width: double.infinity,
       child: SingleChildScrollView(
@@ -30,15 +30,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              SizedBox(height:  size.height*0.04),
-              Text(
-                "Forgot Password",
-                style: TextStyle(
-                  fontSize: 28,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+              SizedBox(height: size.height*0.15,),
+                Text(
+                  'Reset Password',
+                  style: TextStyle(
+                      color: kPrimaryColor,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2
+                      ),
                 ),
-              ),
+                SizedBox(height: defaultPadding*0.5,),
               Text(
                 "Please enter your email and we will send \nyou a link to return to your account",
                 textAlign: TextAlign.center,
@@ -72,16 +74,19 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               labelText: "Email",
+              labelStyle: TextStyle(fontWeight: FontWeight.w500,letterSpacing: 1.2,fontSize: 16),
               hintText: "Enter your email",
-              // If  you are using latest version of flutter then lable text and hint text shown like this
-              // if you r using flutter less then 1.20.* then maybe this is not working properly
+              hintStyle: TextStyle(fontSize: 15,color: kSecondaryColor.withOpacity(0.95)),
               floatingLabelBehavior: FloatingLabelBehavior.always,
-              suffixIcon: Icon(Icons.mail_outline)
+              suffixIcon: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+            child: Icon(Icons.email_outlined),
+          ),
             ),
           ),
           SizedBox(height: 30),
           DefaultButton(
-            text: "Continue",
+            text: "Reset Password",
             size: size,
             press: () {
               if (_formKey.currentState!.validate()) {
@@ -89,7 +94,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
               }
             },
           ),
-          SizedBox(height: size.height * 0.1),
+          SizedBox(height: size.height * 0.05),
           NoAccountText(),
         ],
       ),
