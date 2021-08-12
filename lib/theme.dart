@@ -8,23 +8,11 @@ ThemeData theme() {
     appBarTheme: appBarTheme(),
     fontFamily: 'Ubuntu',
     textTheme: textTheme(),
-    inputDecorationTheme: inputDecorationTheme(),
+   // inputDecorationTheme: inputDecorationTheme(),
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );
 }
 
-InputDecorationTheme inputDecorationTheme() {
-  OutlineInputBorder outlineInputBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(30),
-    borderSide: BorderSide(color: kTextColor),
-    gapPadding: 2,
-  );
-  return InputDecorationTheme(
-    contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-    enabledBorder: outlineInputBorder,
-    focusedBorder: outlineInputBorder,
-  );
-}
 
 TextTheme textTheme() {
   return TextTheme(

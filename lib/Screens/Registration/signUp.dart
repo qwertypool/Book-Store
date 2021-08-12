@@ -1,5 +1,6 @@
 import 'package:book_store/Components/defaultButton.dart';
 import 'package:book_store/Components/socialCard.dart';
+import 'package:book_store/Screens/Home/mainPage.dart';
 import 'package:book_store/Screens/Registration/login.dart';
 import 'package:flutter/material.dart';
 
@@ -107,7 +108,11 @@ class _SignUpFormState extends State<SignUpForm> {
               //   // if all are valid then go to success screen
                
               // }
-               Navigator.pushNamed(context, LoginScreen.routeName);
+               //Navigator.pushNamed(context, MainPage.routeName);
+               Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MainPage()),
+                );
             },
           ),
         ],
@@ -143,6 +148,9 @@ class _SignUpFormState extends State<SignUpForm> {
         hintText: "Re-enter your password",
         hintStyle: TextStyle(fontSize: 15,color: kSecondaryColor.withOpacity(0.95)),
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+        enabledBorder: outlineInputBorder(),
+        focusedBorder: outlineInputBorder(),
         suffixIcon:  Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
             child: Icon(Icons.lock_outline),
@@ -160,6 +168,9 @@ class _SignUpFormState extends State<SignUpForm> {
         hintText: "Enter your password",
         hintStyle: TextStyle(fontSize: 15,color: kSecondaryColor.withOpacity(0.95)),
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+        enabledBorder: outlineInputBorder(),
+        focusedBorder: outlineInputBorder(),
         suffixIcon:  Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
             child: Icon(Icons.lock_outline),
@@ -177,6 +188,9 @@ class _SignUpFormState extends State<SignUpForm> {
         hintText: "Enter your email",
         hintStyle: TextStyle(fontSize: 15,color: kSecondaryColor.withOpacity(0.95)),
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+        enabledBorder: outlineInputBorder(),
+        focusedBorder: outlineInputBorder(),
         suffixIcon: Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
             child: Icon(Icons.email_outlined),
@@ -184,4 +198,11 @@ class _SignUpFormState extends State<SignUpForm> {
       ),
     );
   }
+}
+OutlineInputBorder outlineInputBorder() {
+return OutlineInputBorder(
+        borderRadius: BorderRadius.circular(30),
+        borderSide: BorderSide(color: kTextColor),
+        gapPadding: 2,
+      );
 }
