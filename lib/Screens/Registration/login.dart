@@ -19,12 +19,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      // appBar: AppBar(
-      //   leading: BackButton(),
-      //   title: Text('Sign In',style: TextStyle(fontWeight: FontWeight.w600),),
-      //   centerTitle: true,
-      //   toolbarHeight: 100,
-      // ),
       body: SingleChildScrollView(
         child: Container(
           height: size.height,
@@ -33,17 +27,20 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               children: [
-                SizedBox(height: size.height*0.15,),
+                SizedBox(
+                  height: size.height * 0.15,
+                ),
                 Text(
                   'Sign In ',
                   style: TextStyle(
                       color: kPrimaryColor,
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      letterSpacing: 1.5
-                      ),
+                      letterSpacing: 1.5),
                 ),
-                SizedBox(height: defaultPadding*0.5,),
+                SizedBox(
+                  height: defaultPadding * 0.5,
+                ),
                 Text(
                   'Sign in with email/password \nor continue with social media',
                   textAlign: TextAlign.center,
@@ -51,13 +48,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       letterSpacing: 1,
                       //fontSize: 14,
                       fontWeight: FontWeight.w500),
-                
                 ),
-                 SizedBox(height: size.height*0.09,),
-                 SignInForm(),
-                 //Spacer(flex: 2,),
-                 SizedBox(height: size.height*0.07,),
-                 Row(
+                SizedBox(
+                  height: size.height * 0.09,
+                ),
+                SignInForm(),
+                //Spacer(flex: 2,),
+                SizedBox(
+                  height: size.height * 0.07,
+                ),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SocalCard(
@@ -73,11 +73,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       press: () {},
                     ),
                   ],
-                 ),
-                SizedBox(height: defaultPadding,),
+                ),
+                SizedBox(
+                  height: defaultPadding,
+                ),
                 NoAccountText(),
-                Spacer(),
-            
+                // Spacer(),
               ],
             ),
           ),
@@ -97,101 +98,102 @@ class SignInForm extends StatefulWidget {
 class _SignInFormState extends State<SignInForm> {
   final _formKey = GlobalKey<FormState>();
   final List<String> errors = [];
-    String? password;
-    String? email;
-    bool remember = false;
+  String? password;
+  String? email;
+  bool remember = false;
 
   @override
   Widget build(BuildContext context) {
-    
     Size size = MediaQuery.of(context).size;
     return Form(
         child: Column(
       children: [
         buildEmailField(),
         SizedBox(
-          height: defaultPadding*1.5,
+          height: defaultPadding * 1.5,
         ),
         buildPasswordField(),
         SizedBox(
-          height: defaultPadding*2.5,
+          height: defaultPadding * 2.5,
         ),
-         Row(
-            children: [
-              Checkbox(
-                value: remember,
-                activeColor: kPrimaryColor,
-                onChanged: (value) {
-                  setState(() {
-                    remember = value!;
-                  });
-                },
+        Row(
+          children: [
+            Checkbox(
+              value: remember,
+              activeColor: kPrimaryColor,
+              onChanged: (value) {
+                setState(() {
+                  remember = value!;
+                });
+              },
+            ),
+            Text("Remember me"),
+            Spacer(),
+            GestureDetector(
+              onTap: () =>
+                  Navigator.pushNamed(context, ForgotPassword.routeName),
+              child: Text(
+                "Forgot Password",
+                style: TextStyle(decoration: TextDecoration.underline),
               ),
-              Text("Remember me"),
-              Spacer(),
-              GestureDetector(
-                onTap: () => 
-                Navigator.pushNamed(
-                context, ForgotPassword.routeName),
-                child: Text(
-                  "Forgot Password",
-                  style: TextStyle(decoration: TextDecoration.underline),
-                ),
-              )
-            ],
-          ),
-  
+            )
+          ],
+        ),
         DefaultButton(
           size: size,
           text: 'Sign In',
           press: () {
-        // if (_formKey.currentState!.validate()) {
-        // _formKey.currentState!.save();
-        
-        //   }
-        Navigator.pushNamed(context, SignUpScreen.routeName);
-        },
-      ),
+            // if (_formKey.currentState!.validate()) {
+            // _formKey.currentState!.save();
+
+            //   }
+            Navigator.pushNamed(context, SignUpScreen.routeName);
+          },
+        ),
       ],
     ));
   }
 
   TextFormField buildPasswordField() {
     return TextFormField(
-        cursorColor: Colors.black,
-        cursorHeight: 20,
-        obscureText: true,
-        decoration: InputDecoration(
-          labelText: "Password",
-          labelStyle: TextStyle(fontWeight: FontWeight.w500,letterSpacing: 1.2,fontSize: 16),
-          hintText: "Enter Your Password",
-          hintStyle: TextStyle(fontSize: 15,color: kSecondaryColor.withOpacity(0.95)),
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          suffixIcon: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-            child: Icon(Icons.lock),
-          ),
+      cursorColor: Colors.black,
+      cursorHeight: 20,
+      obscureText: true,
+      decoration: InputDecoration(
+        labelText: "Password",
+        labelStyle: TextStyle(
+            fontWeight: FontWeight.w500, letterSpacing: 1.2, fontSize: 16),
+        hintText: "Enter Your Password",
+        hintStyle:
+            TextStyle(fontSize: 15, color: kSecondaryColor.withOpacity(0.95)),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+          child: Icon(Icons.lock),
         ),
-      );
+      ),
+    );
   }
 
   TextFormField buildEmailField() {
     return TextFormField(
-        keyboardType: TextInputType.emailAddress,
-        cursorColor: Colors.black,
-        cursorHeight: 20,
-        decoration: InputDecoration(
-          labelText: "Email",
-          labelStyle: TextStyle(fontWeight: FontWeight.w500,letterSpacing: 1.2,fontSize: 16),
-          hintText: "Enter Your Email",
-          hintStyle: TextStyle(fontSize: 15,color: kSecondaryColor.withOpacity(0.95)),
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          suffixIcon: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-            child: Icon(Icons.email_outlined),
-          ),
+      keyboardType: TextInputType.emailAddress,
+      cursorColor: Colors.black,
+      cursorHeight: 20,
+      decoration: InputDecoration(
+        labelText: "Email",
+        labelStyle: TextStyle(
+            fontWeight: FontWeight.w500, letterSpacing: 1.2, fontSize: 16),
+        hintText: "Enter Your Email",
+        hintStyle:
+            TextStyle(fontSize: 15, color: kSecondaryColor.withOpacity(0.95)),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+          child: Icon(Icons.email_outlined),
         ),
-      );
+      ),
+    );
   }
 }
 
@@ -213,9 +215,7 @@ class NoAccountText extends StatelessWidget {
           onTap: () => Navigator.pushNamed(context, SignUpScreen.routeName),
           child: Text(
             "Sign Up",
-            style: TextStyle(
-                fontSize: 16,
-                color: kPrimaryColor),
+            style: TextStyle(fontSize: 16, color: kPrimaryColor),
           ),
         ),
       ],
