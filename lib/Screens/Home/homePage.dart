@@ -17,6 +17,7 @@ class HomePage extends StatelessWidget {
           searchBox(size),
           SizedBox(height:defaultPadding*2),
           ImageSliderDemo(),
+          SizedBox(height:defaultPadding*2),
     ],
    ),
   );
@@ -72,7 +73,7 @@ class _ImageSliderDemoState extends State<ImageSliderDemo> {
    'http://enchanting-dock.flywheelsites.com/wp-content/uploads/Game-of-Thrones-Books-600x600.png',
    'https://cultureoflifestudies.com/wp-content/uploads/2015/09/the-hunger-games-books-1-3-1024x768.jpeg',
    'https://i.pinimg.com/originals/12/e7/30/12e730237d6426796848c8a9d4cadf2a.png',
-    'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/7/30/1406718532907/396ff814-8791-451b-9214-6a9b86d54142-1360x2040.jpeg?width=700&quality=85&auto=format&fit=max&s=3d6d51084745f5032837132dacbaca76',
+   'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/7/30/1406718532907/396ff814-8791-451b-9214-6a9b86d54142-1360x2040.jpeg?width=700&quality=85&auto=format&fit=max&s=3d6d51084745f5032837132dacbaca76',
     
     
   ];
@@ -144,7 +145,7 @@ class _ImageSliderDemoState extends State<ImageSliderDemo> {
                   ))
               .toList(),
         )),
-              Row(
+      Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: imgList.asMap().entries.map((entry) {
           return GestureDetector(
@@ -155,14 +156,8 @@ class _ImageSliderDemoState extends State<ImageSliderDemo> {
               height: 6.0,
               margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
               decoration: BoxDecoration(
-                  // shape: _current == entry.key ? BoxShape.rectangle: BoxShape.circle,
-                 // shape: BoxShape.circle,
                  borderRadius: BorderRadius.circular(3),
-                  color: _current == entry.key ? kPrimaryColor : kSecondaryColor.withOpacity(0.7),
-                  // color: (Theme.of(context).brightness == Brightness.dark
-                  //         ? Colors.white
-                  //         : Colors.black)
-                  //     .withOpacity(_current == entry.key ? 0.9 : 0.4)
+                 color: _current == entry.key ? kPrimaryColor : kSecondaryColor.withOpacity(0.7),
               ),
             ),
           );
