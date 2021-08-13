@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Book Store',
       theme: theme(),
-      // initialRoute: SplashScreen.routeName,
-      initialRoute: MainPage.routeName,
+      initialRoute: SplashScreen.routeName,
+     // initialRoute: MainPage.routeName,
       routes: routes,
     );
   }
