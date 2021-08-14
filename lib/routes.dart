@@ -1,3 +1,4 @@
+import 'package:book_store/Screens/Home/mainPage.dart';
 import 'package:book_store/Screens/Registration/forgotPassword.dart';
 import 'package:flutter/widgets.dart';
 import 'package:book_store/splashScreen.dart';
@@ -9,5 +10,6 @@ final Map<String, WidgetBuilder> routes = {
   LoginScreen.routeName  : (context) => LoginScreen(),
   SignUpScreen.routeName : (context) => SignUpScreen(),
   ForgotPassword.routeName : (context) => ForgotPassword(),
+  MainPage.routeName : (context) => MainPage(),
 };
 
