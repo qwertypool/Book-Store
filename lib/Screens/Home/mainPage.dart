@@ -57,7 +57,7 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.info_outline),
+              leading: Icon(Icons.info_outline,color: Colors.grey[800],),
               title: const Text('About us'),
               onTap: () {
                 // Update the state of the app.
@@ -65,7 +65,7 @@ class _MainPageState extends State<MainPage> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.phone),
+              leading: Icon(Icons.phone,color: Colors.grey[800],),
               title: const Text('Contact Us'),
               onTap: () {
                 // Update the state of the app.
@@ -73,7 +73,7 @@ class _MainPageState extends State<MainPage> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.contact_support_outlined),
+              leading: Icon(Icons.contact_support_outlined,color: Colors.grey[800],),
               title: const Text('FAQs'),
               onTap: () {
                 // Update the state of the app.
@@ -81,7 +81,7 @@ class _MainPageState extends State<MainPage> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.import_contacts_outlined),
+              leading: Icon(Icons.import_contacts_outlined,color: Colors.grey[800],),
               title: const Text('Terms & conditions'),
               onTap: () {
                 // Update the state of the app.
@@ -89,7 +89,7 @@ class _MainPageState extends State<MainPage> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.payment),
+              leading: Icon(Icons.payment,color: Colors.grey[800],),
               title: const Text('Payment'),
               onTap: () {
                 // Update the state of the app.
@@ -97,7 +97,7 @@ class _MainPageState extends State<MainPage> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.logout),
+              leading: Icon(Icons.logout,color: Colors.grey[800],),
               title: const Text('Logout'),
               onTap: () {
                 // Update the state of the app.
