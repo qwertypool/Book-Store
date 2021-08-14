@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:book_store/Screens/Registration/signUp.dart';
 import 'package:flutter/material.dart';
 import 'Screens/Registration/login.dart';
 
@@ -11,16 +12,14 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  
   @override
   void initState() {
     super.initState();
-    Timer(
-        Duration(seconds: 3),
-        () => Navigator.pushNamed(context, LoginScreen.routeName));
+    Timer(Duration(seconds: 3),
+        () => Navigator.pushNamed(context, SignUpScreen.routeName));
 
-        // Navigator.of(context).pushReplacement(
-        //     MaterialPageRoute(builder: (BuildContext context) => SignUp())));
+    // Navigator.of(context).pushReplacement(
+    //     MaterialPageRoute(builder: (BuildContext context) => SignUp())));
   }
 
   @override
