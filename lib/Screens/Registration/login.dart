@@ -167,6 +167,9 @@ class _SignInFormState extends State<SignInForm> {
         hintStyle:
             TextStyle(fontSize: 15, color: kSecondaryColor.withOpacity(0.95)),
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+        enabledBorder: outlineInputBorder(),
+        focusedBorder: outlineInputBorder(),
         suffixIcon: Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
           child: Icon(Icons.lock),
@@ -188,6 +191,9 @@ class _SignInFormState extends State<SignInForm> {
         hintStyle:
             TextStyle(fontSize: 15, color: kSecondaryColor.withOpacity(0.95)),
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+        enabledBorder: outlineInputBorder(),
+        focusedBorder: outlineInputBorder(),
         suffixIcon: Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
           child: Icon(Icons.email_outlined),
@@ -221,4 +227,12 @@ class NoAccountText extends StatelessWidget {
       ],
     );
   }
+}
+
+OutlineInputBorder outlineInputBorder() {
+  return OutlineInputBorder(
+    borderRadius: BorderRadius.circular(30),
+    borderSide: BorderSide(color: kTextColor),
+    gapPadding: 2,
+  );
 }
