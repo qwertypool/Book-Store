@@ -1,3 +1,4 @@
+import 'package:book_store/Authentication/firebase_authentication.dart';
 import 'package:book_store/Components/defaultButton.dart';
 import 'package:book_store/Components/socialCard.dart';
 import 'package:book_store/Screens/Registration/signUp.dart';
@@ -97,10 +98,15 @@ class SignInForm extends StatefulWidget {
 
 class _SignInFormState extends State<SignInForm> {
   final _formKey = GlobalKey<FormState>();
+  bool remember = false;
+  bool isConfirmVisible = false;
+  bool isVisible = false;
+  AuthClass authClass = AuthClass();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   final List<String> errors = [];
   String? password;
   String? email;
-  bool remember = false;
 
   @override
   Widget build(BuildContext context) {
@@ -156,9 +162,14 @@ class _SignInFormState extends State<SignInForm> {
 
   TextFormField buildPasswordField() {
     return TextFormField(
+      obscureText: !isVisible,
+      controller: _passwordController,
+      validator: (value) {
+        if (value!.length <1) return "Please enter valid password";
+        return null;
+      },
       cursorColor: Colors.black,
       cursorHeight: 20,
-      obscureText: true,
       decoration: InputDecoration(
         labelText: "Password",
         labelStyle: TextStyle(
@@ -170,9 +181,18 @@ class _SignInFormState extends State<SignInForm> {
         contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         enabledBorder: outlineInputBorder(),
         focusedBorder: outlineInputBorder(),
-        suffixIcon: Padding(
+        focusedErrorBorder: outlineInputBorder(),
+        errorBorder: outlineInputBorder(),
+                suffixIcon: Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-          child: Icon(Icons.lock),
+          child: InkWell(
+            child: Icon(isVisible ? Icons.visibility : Icons.visibility_off),
+            onTap: () {
+              setState(() {
+                isVisible = !isVisible;
+              });
+            },
+          ),
         ),
       ),
     );
@@ -181,6 +201,11 @@ class _SignInFormState extends State<SignInForm> {
   TextFormField buildEmailField() {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
+      controller: _emailController,
+      validator: (value) {
+        if (value!.isEmpty) return "Please enter your email";
+        return null;
+      },
       cursorColor: Colors.black,
       cursorHeight: 20,
       decoration: InputDecoration(
@@ -194,6 +219,8 @@ class _SignInFormState extends State<SignInForm> {
         contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         enabledBorder: outlineInputBorder(),
         focusedBorder: outlineInputBorder(),
+        focusedErrorBorder: outlineInputBorder(),
+        errorBorder: outlineInputBorder(),
         suffixIcon: Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
           child: Icon(Icons.email_outlined),
