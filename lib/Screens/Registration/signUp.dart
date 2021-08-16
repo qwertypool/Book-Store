@@ -2,6 +2,7 @@ import 'package:book_store/Authentication/firebase_authentication.dart';
 import 'package:book_store/Components/defaultButton.dart';
 import 'package:book_store/Components/socialCard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../constantParameters.dart';
 
@@ -24,53 +25,111 @@ class SignUpScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: size.height * 0.1,
+                    height: size.height * 0.06,
                   ),
                   Text(
                     "Sign Up",
                     style: TextStyle(
                         color: kPrimaryColor,
-                        fontSize: 30,
+                        fontSize: 40,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1.5),
                   ),
-                  SizedBox(
-                    height: defaultPadding * 0.5,
-                  ),
-                  Text(
-                    "Complete your details or continue \nwith social media",
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: size.height * 0.08),
+
+                  SizedBox(height: size.height * 0.05),
                   SignUpForm(),
                   SizedBox(
-                    height: size.height * 0.07,
+                    height: size.height * 0.04,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SocalCard(
-                        icon: "assets/svgs/google.svg",
-                        press: () {
-                          authClass.googleSignIn(context);
-                        },
+                      Expanded(
+                        child: Divider(
+                          color: Colors.grey[600],
+                          height: 1.5,
+                        ),
                       ),
-                      SocalCard(
-                        icon: "assets/svgs/facebook.svg",
-                        press: () {},
+                      Text(
+                        '  OR  ',
                       ),
-                      SocalCard(
-                        icon: "assets/svgs/twitter.svg",
-                        press: () {},
+                      Expanded(
+                        child: Divider(
+                          color: Colors.grey[600],
+                          height: 1.5,
+                        ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
-                  Text(
-                    'By continuing your confirm that you agree \nwith our Term and Condition',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.caption,
-                  )
+                  SizedBox(
+                    height: size.height * 0.04,
+                  ),
+                  RawMaterialButton(
+                    constraints: BoxConstraints(
+                        maxWidth: size.width * 0.8, minHeight: 52),
+                    elevation: 10,
+                    //fillColor: kPrimaryColor.withOpacity(0.5),
+                    fillColor: Colors.black,
+                    //fillColor: kSecondaryColor,
+                    onPressed: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(
+                            height: 30,
+                            width: 30,
+                            // child: Image.asset('assets/svgs/google.svg')),
+                            child: SvgPicture.asset('assets/svgs/google.svg')),
+                        Text(
+                          'Sign Up with Google',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              letterSpacing: 1),
+                        )
+                      ],
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     SocalCard(
+                  //       icon: "assets/svgs/google.svg",
+                  //       press: () {},
+                  //     ),
+                  //     SocalCard(
+                  //       icon: "assets/svgs/facebook.svg",
+                  //       press: () {},
+                  //     ),
+                  //     SocalCard(
+                  //       icon: "assets/svgs/twitter.svg",
+                  //       press: () {},
+                  //     ),
+                  //   ],
+                  // ),
+                  SizedBox(height: 25),
+                  RichText(
+                    text: TextSpan(
+                      text:
+                          'By continuing your confirm that you agree \nwith our ',
+                      style: TextStyle(color: kSecondaryColor, fontSize: 12),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: 'Terms and Conditions!',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline,
+                            )),
+                      ],
+                    ),
+                  ),
+                  // Text(
+                  //   'By continuing your confirm that you agree \nwith our Term and Condition',
+                  //   textAlign: TextAlign.center,
+                  //   style: Theme.of(context).textTheme.caption,
+                  // )
                 ],
               ),
             ),
@@ -132,7 +191,7 @@ class _SignUpFormState extends State<SignUpForm> {
       obscureText: !isConfirmVisible,
       controller: _confirmPasswordController,
       validator: (value) {
-        if (value!.length < 6) return "Password length should atleast be 6";
+        if (value!.length < 6) return "Password should atleast be 6 characters";
         return null;
       },
       decoration: InputDecoration(
@@ -147,6 +206,7 @@ class _SignUpFormState extends State<SignUpForm> {
         enabledBorder: outlineInputBorder(),
         focusedBorder: outlineInputBorder(),
         errorBorder: outlineInputBorder(),
+        focusedErrorBorder: outlineInputBorder(),
         suffixIcon: Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
           child: InkWell(
@@ -168,7 +228,7 @@ class _SignUpFormState extends State<SignUpForm> {
       obscureText: !isVisible,
       controller: _passwordController,
       validator: (value) {
-        if (value!.length < 6) return "Password length should atleast be 6";
+        if (value!.length < 6) return "Password should atleast be 6 characters";
         return null;
       },
       decoration: InputDecoration(
@@ -183,6 +243,7 @@ class _SignUpFormState extends State<SignUpForm> {
         enabledBorder: outlineInputBorder(),
         errorBorder: outlineInputBorder(),
         focusedBorder: outlineInputBorder(),
+        focusedErrorBorder: outlineInputBorder(),
         suffixIcon: Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
           child: InkWell(
@@ -203,7 +264,7 @@ class _SignUpFormState extends State<SignUpForm> {
       keyboardType: TextInputType.emailAddress,
       controller: _emailController,
       validator: (value) {
-        if (value!.isEmpty) return "Email can't be empty";
+        if (value!.isEmpty) return "Invalid Email";
         return null;
       },
       decoration: InputDecoration(
@@ -218,6 +279,7 @@ class _SignUpFormState extends State<SignUpForm> {
         enabledBorder: outlineInputBorder(),
         focusedBorder: outlineInputBorder(),
         errorBorder: outlineInputBorder(),
+        focusedErrorBorder: outlineInputBorder(),
         suffixIcon: Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
           child: Icon(Icons.email_outlined),
