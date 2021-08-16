@@ -107,57 +107,58 @@ class _SignInFormState extends State<SignInForm> {
   final List<String> errors = [];
   String? password;
   String? email;
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Form(
+        key: _formKey,
         child: Column(
-      children: [
-        buildEmailField(),
-        SizedBox(
-          height: defaultPadding * 1.5,
-        ),
-        buildPasswordField(),
-        SizedBox(
-          height: defaultPadding * 2.5,
-        ),
-        Row(
           children: [
-            Checkbox(
-              value: remember,
-              activeColor: kPrimaryColor,
-              onChanged: (value) {
-                setState(() {
-                  remember = value!;
-                });
+            buildEmailField(),
+            SizedBox(
+              height: defaultPadding * 1.5,
+            ),
+            buildPasswordField(),
+            SizedBox(
+              height: defaultPadding * 2.5,
+            ),
+            Row(
+              children: [
+                Checkbox(
+                  value: remember,
+                  activeColor: kPrimaryColor,
+                  onChanged: (value) {
+                    setState(() {
+                      remember = value!;
+                    });
+                  },
+                ),
+                Text("Remember me"),
+                Spacer(),
+                GestureDetector(
+                  onTap: () =>
+                      Navigator.pushNamed(context, ForgotPassword.routeName),
+                  child: Text(
+                    "Forgot Password",
+                    style: TextStyle(decoration: TextDecoration.underline),
+                  ),
+                )
+              ],
+            ),
+            DefaultButton(
+              size: size,
+              text: 'Sign In',
+              press: () {
+                if (_formKey.currentState!.validate()) {
+                  authClass.signInWithEmail(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                      context: context);
+                }
               },
             ),
-            Text("Remember me"),
-            Spacer(),
-            GestureDetector(
-              onTap: () =>
-                  Navigator.pushNamed(context, ForgotPassword.routeName),
-              child: Text(
-                "Forgot Password",
-                style: TextStyle(decoration: TextDecoration.underline),
-              ),
-            )
           ],
-        ),
-        DefaultButton(
-          size: size,
-          text: 'Sign In',
-          press: () {
-            // if (_formKey.currentState!.validate()) {
-            // _formKey.currentState!.save();
-
-            //   }
-            Navigator.pushNamed(context, SignUpScreen.routeName);
-          },
-        ),
-      ],
-    ));
+        ));
   }
 
   TextFormField buildPasswordField() {
@@ -165,7 +166,7 @@ class _SignInFormState extends State<SignInForm> {
       obscureText: !isVisible,
       controller: _passwordController,
       validator: (value) {
-        if (value!.length <1) return "Please enter valid password";
+        if (value!.length < 1) return "Please enter valid password";
         return null;
       },
       cursorColor: Colors.black,
@@ -183,7 +184,7 @@ class _SignInFormState extends State<SignInForm> {
         focusedBorder: outlineInputBorder(),
         focusedErrorBorder: outlineInputBorder(),
         errorBorder: outlineInputBorder(),
-                suffixIcon: Padding(
+        suffixIcon: Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
           child: InkWell(
             child: Icon(isVisible ? Icons.visibility : Icons.visibility_off),
