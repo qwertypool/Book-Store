@@ -1,10 +1,8 @@
-import 'package:book_store/Screens/Home/mainPage.dart';
 import 'package:book_store/routes.dart';
 import 'package:book_store/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'Screens/Registration/verifyEmail.dart';
 import 'theme.dart';
 
 void main() async {
@@ -20,10 +18,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Book Store',
       theme: theme(),
-      //initialRoute: SplashScreen.routeName,
-      home: VerifyEmail(),
-      //initialRoute: MainPage.routeName,
-     // routes: routes,
+      initialRoute: SplashScreen.routeName,
+      routes: routes,
     );
   }
 }

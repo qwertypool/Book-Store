@@ -1,6 +1,7 @@
 import 'package:book_store/Authentication/firebase_authentication.dart';
 import 'package:book_store/Components/defaultButton.dart';
 import 'package:book_store/Components/socialCard.dart';
+import 'package:book_store/Screens/Registration/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -35,7 +36,6 @@ class SignUpScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1.5),
                   ),
-
                   SizedBox(height: size.height * 0.05),
                   SignUpForm(),
                   SizedBox(
@@ -67,24 +67,25 @@ class SignUpScreen extends StatelessWidget {
                     constraints: BoxConstraints(
                         maxWidth: size.width * 0.8, minHeight: 52),
                     elevation: 10,
-                    //fillColor: kPrimaryColor.withOpacity(0.5),
-                    fillColor: Colors.black,
-                    //fillColor: kSecondaryColor,
+                    fillColor: Color.fromRGBO(191, 191, 201, 1),
                     onPressed: () {},
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                            height: 30,
-                            width: 30,
-                            // child: Image.asset('assets/svgs/google.svg')),
-                            child: SvgPicture.asset('assets/svgs/google.svg')),
+                          height: 23,
+                          width: 23,
+                          child: SvgPicture.asset('assets/svgs/google.svg'),
+                        ),
+                        SizedBox(
+                          width: defaultPadding,
+                        ),
                         Text(
                           'Sign Up with Google',
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              letterSpacing: 1),
+                            color: Color(0xff404F5F),
+                            fontSize: 18,
+                          ),
                         )
                       ],
                     ),
@@ -92,23 +93,6 @@ class SignUpScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     SocalCard(
-                  //       icon: "assets/svgs/google.svg",
-                  //       press: () {},
-                  //     ),
-                  //     SocalCard(
-                  //       icon: "assets/svgs/facebook.svg",
-                  //       press: () {},
-                  //     ),
-                  //     SocalCard(
-                  //       icon: "assets/svgs/twitter.svg",
-                  //       press: () {},
-                  //     ),
-                  //   ],
-                  // ),
                   SizedBox(height: 25),
                   RichText(
                     text: TextSpan(
@@ -125,11 +109,12 @@ class SignUpScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Text(
-                  //   'By continuing your confirm that you agree \nwith our Term and Condition',
-                  //   textAlign: TextAlign.center,
-                  //   style: Theme.of(context).textTheme.caption,
-                  // )
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, LoginScreen.routeName);
+                    },
+                    child: Text("login"),
+                  ),
                 ],
               ),
             ),
@@ -172,7 +157,7 @@ class _SignUpFormState extends State<SignUpForm> {
             size: size,
             press: () {
               if (_formKey.currentState!.validate()) {
-                authClass.signInWithEmail(
+                authClass.signUpWithEmail(
                   email: _emailController.text,
                   password: _passwordController.text,
                   confirmPassword: _confirmPasswordController.text,

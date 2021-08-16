@@ -1,4 +1,6 @@
+import 'package:book_store/Screens/Home/homePage.dart';
 import 'package:book_store/Screens/Home/mainPage.dart';
+import 'package:book_store/Screens/Registration/verifyEmail.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -18,18 +20,58 @@ class AuthClass {
   Future<void>? signInWithEmail(
       {required String email,
       required String password,
+      required BuildContext context}) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      User? user = _auth.currentUser;
+      if (user != null && !user.emailVerified) {
+        showSnackBar(context, 'We already sent you an email for verification');
+
+        /// todo Handle the email expire error
+      } else
+        Navigator.pushNamedAndRemoveUntil(
+            context, MainPage.routeName, (route) => false);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        showSnackBar(context, 'No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        showSnackBar(context, 'Wrong password provided for that user.');
+      }
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+  Future<void>? signUpWithEmail(
+      {required String email,
+      required String password,
       required String confirmPassword,
       required BuildContext context}) async {
     if (password == confirmPassword) {
       try {
         UserCredential userCredential = await _auth
             .createUserWithEmailAndPassword(email: email, password: password);
-        storeTokenAndData(userCredential);
+        User? user = _auth.currentUser;
+
+        if (user != null && !user.emailVerified) {
+          await user.sendEmailVerification();
+        }
+
+        // storeTokenAndData(userCredential);
 
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MainPage()),
+          MaterialPageRoute(
+            builder: (context) => VerifyEmail(),
+          ),
         );
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          showSnackBar(context, 'Password should atleast be of 6 characters');
+        } else if (e.code == 'email-already-in-use') {
+          showSnackBar(context, 'This email is already taken');
+        }
       } catch (e) {
         showSnackBar(context, e.toString());
       }
