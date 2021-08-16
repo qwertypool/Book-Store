@@ -1,7 +1,8 @@
 import 'dart:async';
+import 'package:book_store/Screens/Home/mainPage.dart';
 import 'package:book_store/Screens/Registration/signUp.dart';
 import 'package:flutter/material.dart';
-import 'Screens/Registration/login.dart';
+import 'Authentication/firebase_authentication.dart';
 
 class SplashScreen extends StatefulWidget {
   static String routeName = "/splash";
@@ -12,14 +13,21 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  AuthClass authClass = AuthClass();
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3),
-        () => Navigator.pushNamed(context, SignUpScreen.routeName));
+    checkLogin();
+  }
 
-    // Navigator.of(context).pushReplacement(
-    //     MaterialPageRoute(builder: (BuildContext context) => SignUp())));
+  checkLogin() async {
+    String? token = await authClass.getToken();
+    if (token != null)
+      Timer(Duration(seconds: 2),
+          () => Navigator.pushNamed(context, MainPage.routeName));
+    else
+      Timer(Duration(seconds: 2),
+          () => Navigator.pushNamed(context, SignUpScreen.routeName));
   }
 
   @override

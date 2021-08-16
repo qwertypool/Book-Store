@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 
 import '../../constantParameters.dart';
 
+AuthClass authClass = AuthClass();
+
 class SignUpScreen extends StatelessWidget {
   static String routeName = "/SignUpScreen";
   const SignUpScreen({Key? key}) : super(key: key);
@@ -49,7 +51,9 @@ class SignUpScreen extends StatelessWidget {
                     children: [
                       SocalCard(
                         icon: "assets/svgs/google.svg",
-                        press: () {},
+                        press: () {
+                          authClass.googleSignIn(context);
+                        },
                       ),
                       SocalCard(
                         icon: "assets/svgs/facebook.svg",
@@ -87,7 +91,6 @@ class _SignUpFormState extends State<SignUpForm> {
   bool remember = false;
   bool isConfirmVisible = false;
   bool isVisible = false;
-  AuthClass authClass = AuthClass();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
