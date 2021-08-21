@@ -1,17 +1,16 @@
 import 'package:book_store/Authentication/firebase_authentication.dart';
 import 'package:book_store/Components/defaultButton.dart';
-import 'package:book_store/Components/socialCard.dart';
+import 'package:book_store/Components/haveAccountCheck.dart';
+import 'package:book_store/Components/socialMediaRegistration.dart';
 import 'package:book_store/Screens/Registration/login.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
 import '../../constantParameters.dart';
 
 AuthClass authClass = AuthClass();
 
 class SignUpScreen extends StatelessWidget {
   static String routeName = "/SignUpScreen";
-  const SignUpScreen({Key? key}) : super(key: key);
+  SignUpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class SignUpScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: size.height * 0.06,
+                    height: size.height * 0.085,
                   ),
                   Text(
                     "Sign Up",
@@ -36,7 +35,7 @@ class SignUpScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1.5),
                   ),
-                  SizedBox(height: size.height * 0.05),
+                  SizedBox(height: size.height * 0.02),
                   SignUpForm(),
                   SizedBox(
                     height: size.height * 0.04,
@@ -60,60 +59,18 @@ class SignUpScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: size.height * 0.04,
+                  SizedBox(height: defaultPadding*1.5,),
+                  SocialMediaRegistration(
+                    size: size,
+                    iconName: 'google.svg',
+                    socialName: 'Google',
+                    press: () {},
                   ),
-                  RawMaterialButton(
-                    constraints: BoxConstraints(
-                        maxWidth: size.width * 0.8, minHeight: 52),
-                    elevation: 10,
-                    fillColor: Color.fromRGBO(191, 191, 201, 1),
-                    onPressed: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 23,
-                          width: 23,
-                          child: SvgPicture.asset('assets/svgs/google.svg'),
-                        ),
-                        SizedBox(
-                          width: defaultPadding,
-                        ),
-                        Text(
-                          'Sign Up with Google',
-                          style: TextStyle(
-                            color: Color(0xff404F5F),
-                            fontSize: 18,
-                          ),
-                        )
-                      ],
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  SizedBox(height: 25),
-                  RichText(
-                    text: TextSpan(
-                      text:
-                          'By continuing your confirm that you agree \nwith our ',
-                      style: TextStyle(color: kSecondaryColor, fontSize: 12),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: 'Terms and Conditions!',
-                            style: TextStyle(
-                              color: Colors.blue,
-                              decoration: TextDecoration.underline,
-                            )),
-                      ],
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, LoginScreen.routeName);
-                    },
-                    child: Text("login"),
+                  SizedBox(height: defaultPadding*1.5),
+                  HaveAccountCheck(
+                    text: 'Already',
+                    routeName: LoginScreen.routeName,
+                    text2: 'In',
                   ),
                 ],
               ),
@@ -146,11 +103,12 @@ class _SignUpFormState extends State<SignUpForm> {
       key: _formKey,
       child: Column(
         children: [
+          SizedBox(height: defaultPadding * 1.2),
           buildEmailFormField(),
-          SizedBox(height: defaultPadding * 1.5),
+          SizedBox(height: defaultPadding * 1.2),
           buildPasswordFormField(),
-          SizedBox(height: defaultPadding * 1.5),
-          buildConformPassFormField(),
+          SizedBox(height: defaultPadding * 1.2),
+          buildConfirmPassFormField(),
           SizedBox(height: defaultPadding * 2),
           DefaultButton(
             text: "Sign Up",
@@ -171,7 +129,8 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 
-  TextFormField buildConformPassFormField() {
+
+  TextFormField buildConfirmPassFormField() {
     return TextFormField(
       obscureText: !isConfirmVisible,
       controller: _confirmPasswordController,
@@ -183,10 +142,6 @@ class _SignUpFormState extends State<SignUpForm> {
         labelText: "Confirm Password",
         labelStyle: TextStyle(
             fontWeight: FontWeight.w500, letterSpacing: 1.2, fontSize: 16),
-        hintText: "Re-enter your password",
-        hintStyle:
-            TextStyle(fontSize: 15, color: kSecondaryColor.withOpacity(0.95)),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
         contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         enabledBorder: outlineInputBorder(),
         focusedBorder: outlineInputBorder(),
@@ -196,7 +151,9 @@ class _SignUpFormState extends State<SignUpForm> {
           padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
           child: InkWell(
             child: Icon(
-                isConfirmVisible ? Icons.visibility : Icons.visibility_off),
+              isConfirmVisible ? Icons.visibility : Icons.visibility_off,
+              color: Colors.black.withOpacity(0.8),
+            ),
             onTap: () {
               setState(() {
                 isConfirmVisible = !isConfirmVisible;
@@ -220,10 +177,6 @@ class _SignUpFormState extends State<SignUpForm> {
         labelText: "Password",
         labelStyle: TextStyle(
             fontWeight: FontWeight.w500, letterSpacing: 1.2, fontSize: 16),
-        hintText: "Enter your password",
-        hintStyle:
-            TextStyle(fontSize: 15, color: kSecondaryColor.withOpacity(0.95)),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
         contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         enabledBorder: outlineInputBorder(),
         errorBorder: outlineInputBorder(),
@@ -232,7 +185,10 @@ class _SignUpFormState extends State<SignUpForm> {
         suffixIcon: Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
           child: InkWell(
-            child: Icon(isVisible ? Icons.visibility : Icons.visibility_off),
+            child: Icon(
+              isVisible ? Icons.visibility : Icons.visibility_off,
+              color: Colors.black.withOpacity(0.8),
+            ),
             onTap: () {
               setState(() {
                 isVisible = !isVisible;
@@ -256,10 +212,6 @@ class _SignUpFormState extends State<SignUpForm> {
         labelText: "Email",
         labelStyle: TextStyle(
             fontWeight: FontWeight.w500, letterSpacing: 1.2, fontSize: 16),
-        hintText: "Enter your email",
-        hintStyle:
-            TextStyle(fontSize: 15, color: kSecondaryColor.withOpacity(0.95)),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
         contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         enabledBorder: outlineInputBorder(),
         focusedBorder: outlineInputBorder(),
@@ -267,7 +219,10 @@ class _SignUpFormState extends State<SignUpForm> {
         focusedErrorBorder: outlineInputBorder(),
         suffixIcon: Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-          child: Icon(Icons.email_outlined),
+          child: Icon(
+            Icons.email,
+            color: Colors.black.withOpacity(0.8),
+          ),
         ),
       ),
     );
@@ -281,3 +236,5 @@ OutlineInputBorder outlineInputBorder() {
     gapPadding: 2,
   );
 }
+
+

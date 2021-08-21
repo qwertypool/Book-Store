@@ -1,8 +1,10 @@
+import 'package:book_store/Authentication/firebase_authentication.dart';
 import 'package:book_store/Components/defaultButton.dart';
 import 'package:book_store/Screens/Registration/signUp.dart';
 import 'package:flutter/material.dart';
-
 import '../../constantParameters.dart';
+
+AuthClass authClass = AuthClass();
 
 class ForgotPassword extends StatefulWidget {
   static String routeName = '/forgotPasswordRoute';
@@ -15,46 +17,44 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
-   Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Forgot Password",style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
-      //   centerTitle: true,
-      //   toolbarHeight: 100,
-      // ),
-      body: SizedBox(
-      width: double.infinity,
-      child: SingleChildScrollView(
-        child: Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              SizedBox(height: size.height*0.15,),
-                Text(
-                  'Reset Password',
-                  style: TextStyle(
-                      color: kPrimaryColor,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.2
-                      ),
-                ),
-                SizedBox(height: defaultPadding*0.5,),
-              Text(
-                "Please enter your email and we will send \nyou a link to return to your account",
-                textAlign: TextAlign.center,
+        appBar: AppBar(),
+        body: SizedBox(
+          width: double.infinity,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: size.height * 0.05,
+                  ),
+                  Text(
+                    'Reset Password',
+                    style: TextStyle(
+                        color: kPrimaryColor,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.2),
+                  ),
+                  SizedBox(
+                    height: defaultPadding * 0.5,
+                  ),
+                  Text(
+                    "Please enter your email and we will send \nyou a link to return to your account",
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: size.height * 0.1),
+                  ForgotPassForm(),
+                ],
               ),
-              SizedBox(height: size.height*0.1),
-              ForgotPassForm(),
-            ],
+            ),
           ),
-        ),
-      ),
-    )
-    );
+        ));
   }
 }
+
 class ForgotPassForm extends StatefulWidget {
   @override
   _ForgotPassFormState createState() => _ForgotPassFormState();
@@ -63,6 +63,7 @@ class ForgotPassForm extends StatefulWidget {
 class _ForgotPassFormState extends State<ForgotPassForm> {
   final _formKey = GlobalKey<FormState>();
   List<String> errors = [];
+  TextEditingController forgotemailcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -71,20 +72,26 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
       child: Column(
         children: [
           TextFormField(
+            controller: forgotemailcontroller,
+            validator: (value) {
+              if (value!.isEmpty) return "Invalid Email";
+              return null;
+            },
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               labelText: "Email",
-              labelStyle: TextStyle(fontWeight: FontWeight.w500,letterSpacing: 1.2,fontSize: 16),
-              hintText: "Enter your email",
-              hintStyle: TextStyle(fontSize: 15,color: kSecondaryColor.withOpacity(0.95)),
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+              labelStyle: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 1.2,
+                  fontSize: 16),
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               enabledBorder: outlineInputBorder(),
               focusedBorder: outlineInputBorder(),
               suffixIcon: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-            child: Icon(Icons.email_outlined),
-          ),
+                padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                child: Icon(Icons.email),
+              ),
             ),
           ),
           SizedBox(height: 30),
@@ -94,7 +101,10 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
             press: () {
               if (_formKey.currentState!.validate()) {
                 // Do what you want to do
+                authClass.resetPassword(
+                email: forgotemailcontroller.text, context: context);
               }
+             
             },
           ),
           SizedBox(height: size.height * 0.05),
@@ -104,13 +114,15 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
     );
   }
 }
+
 OutlineInputBorder outlineInputBorder() {
-return OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30),
-        borderSide: BorderSide(color: kTextColor),
-        gapPadding: 2,
-      );
+  return OutlineInputBorder(
+    borderRadius: BorderRadius.circular(30),
+    borderSide: BorderSide(color: kTextColor),
+    gapPadding: 2,
+  );
 }
+
 class NoAccountText extends StatelessWidget {
   const NoAccountText({
     Key? key,
@@ -129,9 +141,7 @@ class NoAccountText extends StatelessWidget {
           onTap: () => Navigator.pushNamed(context, SignUpScreen.routeName),
           child: Text(
             "Sign Up",
-            style: TextStyle(
-                fontSize: 16,
-                color: kPrimaryColor),
+            style: TextStyle(fontSize: 16, color: kPrimaryColor),
           ),
         ),
       ],

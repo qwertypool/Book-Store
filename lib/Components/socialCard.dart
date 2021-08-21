@@ -31,3 +31,4 @@ class SocalCard extends StatelessWidget {
     );
   }
 }
+

@@ -1,4 +1,3 @@
-import 'package:book_store/Screens/Home/homePage.dart';
 import 'package:book_store/Screens/Home/mainPage.dart';
 import 'package:book_store/Screens/Registration/verifyEmail.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,6 +16,8 @@ class AuthClass {
   );
 
   final storage = new FlutterSecureStorage();
+
+//Sign in with email
   Future<void>? signInWithEmail(
       {required String email,
       required String password,
@@ -43,6 +44,7 @@ class AuthClass {
     }
   }
 
+//Sign up with Email
   Future<void>? signUpWithEmail(
       {required String email,
       required String password,
@@ -60,12 +62,7 @@ class AuthClass {
 
         // storeTokenAndData(userCredential);
 
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => VerifyEmail(),
-          ),
-        );
+        Navigator.pushNamed(context, VerifyEmail.routeName);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           showSnackBar(context, 'Password should atleast be of 6 characters');
@@ -76,10 +73,29 @@ class AuthClass {
         showSnackBar(context, e.toString());
       }
     } else {
-      showSnackBar(context, "Passowrd did'nt matched");
+      showSnackBar(context, "Passwords didn't matched");
     }
   }
 
+// Reset Password
+  Future<void> resetPassword(
+      {required String email, required BuildContext context}) async {
+    try {
+      await _auth.sendPasswordResetEmail(
+        email: email,
+      );
+      showModalSheet(context,
+          'A password reset link has been sent to your mail. Please reset your password there and login back again');
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-email') {
+        showSnackBar(context, 'Invalid email address');
+      } else if (e.code == 'user-not-found') {
+        showSnackBar(context, 'No user found with this email address');
+      }
+    }
+  }
+
+//Google sign In
   Future<void> googleSignIn(BuildContext context) async {
     try {
       GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
@@ -103,10 +119,10 @@ class AuthClass {
     }
   }
 
+  //Sign Out
   Future<void> signOut({required BuildContext context}) async {
     try {
       await _googleSignIn.signOut();
-
       await _auth.signOut();
       await storage.delete(key: "token");
     } catch (e) {
@@ -131,4 +147,35 @@ class AuthClass {
     final snackBar = SnackBar(content: Text(text));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
+}
+
+void showModalSheet(BuildContext context, String text) {
+  showModalBottomSheet<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return Container(
+        height: 200,
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                text,
+                style: TextStyle(fontSize: 16, color: Colors.black),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                child: const Text('Ok'),
+                onPressed: () => Navigator.pop(context),
+              )
+            ],
+          ),
+        ),
+      );
+    },
+  );
 }

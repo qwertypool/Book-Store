@@ -1,6 +1,7 @@
 import 'package:book_store/Authentication/firebase_authentication.dart';
 import 'package:book_store/Components/defaultButton.dart';
-import 'package:book_store/Components/socialCard.dart';
+import 'package:book_store/Components/haveAccountCheck.dart';
+import 'package:book_store/Components/socialMediaRegistration.dart';
 import 'package:book_store/Screens/Registration/signUp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -35,50 +36,52 @@ class _LoginScreenState extends State<LoginScreen> {
                   'Sign In ',
                   style: TextStyle(
                       color: kPrimaryColor,
-                      fontSize: 30,
+                      fontSize: 40,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.5),
                 ),
                 SizedBox(
-                  height: defaultPadding * 0.5,
-                ),
-                Text(
-                  'Sign in with email/password \nor continue with social media',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      letterSpacing: 1,
-                      //fontSize: 14,
-                      fontWeight: FontWeight.w500),
-                ),
-                SizedBox(
-                  height: size.height * 0.09,
+                  height: defaultPadding * 2,
                 ),
                 SignInForm(),
-                //Spacer(flex: 2,),
                 SizedBox(
-                  height: size.height * 0.07,
+                  height: size.height * 0.03,
                 ),
+                
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SocalCard(
-                      icon: "assets/svgs/google.svg",
-                      press: () {},
-                    ),
-                    SocalCard(
-                      icon: "assets/svgs/facebook.svg",
-                      press: () {},
-                    ),
-                    SocalCard(
-                      icon: "assets/svgs/twitter.svg",
-                      press: () {},
-                    ),
-                  ],
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          color: Colors.grey[600],
+                          height: 1.5,
+                        ),
+                      ),
+                      Text(
+                        '  OR  ',
+                      ),
+                      Expanded(
+                        child: Divider(
+                          color: Colors.grey[600],
+                          height: 1.5,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: defaultPadding*1.5,),
+                  SocialMediaRegistration(
+                    size: size,
+                    iconName: 'google.svg',
+                    socialName: 'Google',
+                    press: () {},
+                  ),
+                  SizedBox(
+                  height: defaultPadding*1.5,
                 ),
-                SizedBox(
-                  height: defaultPadding,
+                HaveAccountCheck(
+                   text: 'Dont',
+                    routeName: SignUpScreen.routeName,
+                    text2: 'Up',
                 ),
-                NoAccountText(),
                 // Spacer(),
               ],
             ),
@@ -174,11 +177,7 @@ class _SignInFormState extends State<SignInForm> {
       decoration: InputDecoration(
         labelText: "Password",
         labelStyle: TextStyle(
-            fontWeight: FontWeight.w500, letterSpacing: 1.2, fontSize: 16),
-        hintText: "Enter Your Password",
-        hintStyle:
-            TextStyle(fontSize: 15, color: kSecondaryColor.withOpacity(0.95)),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
+        fontWeight: FontWeight.w500, letterSpacing: 1.2, fontSize: 16),
         contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         enabledBorder: outlineInputBorder(),
         focusedBorder: outlineInputBorder(),
@@ -187,7 +186,7 @@ class _SignInFormState extends State<SignInForm> {
         suffixIcon: Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
           child: InkWell(
-            child: Icon(isVisible ? Icons.visibility : Icons.visibility_off),
+            child: Icon(isVisible ? Icons.visibility : Icons.visibility_off,color: Colors.black.withOpacity(0.8),),
             onTap: () {
               setState(() {
                 isVisible = !isVisible;
@@ -212,11 +211,7 @@ class _SignInFormState extends State<SignInForm> {
       decoration: InputDecoration(
         labelText: "Email",
         labelStyle: TextStyle(
-            fontWeight: FontWeight.w500, letterSpacing: 1.2, fontSize: 16),
-        hintText: "Enter Your Email",
-        hintStyle:
-            TextStyle(fontSize: 15, color: kSecondaryColor.withOpacity(0.95)),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
+        fontWeight: FontWeight.w500, letterSpacing: 1.2, fontSize: 16),
         contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         enabledBorder: outlineInputBorder(),
         focusedBorder: outlineInputBorder(),
@@ -224,38 +219,14 @@ class _SignInFormState extends State<SignInForm> {
         errorBorder: outlineInputBorder(),
         suffixIcon: Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-          child: Icon(Icons.email_outlined),
+          child: Icon(Icons.email,color: Colors.black.withOpacity(0.8),),
         ),
       ),
     );
   }
 }
 
-class NoAccountText extends StatelessWidget {
-  const NoAccountText({
-    Key? key,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          "Don’t have an account? ",
-          style: TextStyle(fontSize: 16),
-        ),
-        GestureDetector(
-          onTap: () => Navigator.pushNamed(context, SignUpScreen.routeName),
-          child: Text(
-            "Sign Up",
-            style: TextStyle(fontSize: 16, color: kPrimaryColor),
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 OutlineInputBorder outlineInputBorder() {
   return OutlineInputBorder(
