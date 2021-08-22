@@ -1,4 +1,5 @@
 import 'package:book_store/Screens/Home/mainPage.dart';
+import 'package:book_store/Screens/Registration/login.dart';
 import 'package:book_store/Screens/Registration/verifyEmail.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +28,11 @@ class AuthClass {
           .signInWithEmailAndPassword(email: email, password: password);
       User? user = _auth.currentUser;
       if (user != null && !user.emailVerified) {
-        showSnackBar(context, 'We already sent you an email for verification');
+        showSnackBar(context, 'Email was not verified');
+        await user.sendEmailVerification();
 
-        /// todo Handle the email expire error
+        Navigator.pushNamed(context, VerifyEmail.routeName,
+            arguments: VerifyEmailArguments(email));
       } else
         Navigator.pushNamedAndRemoveUntil(
             context, MainPage.routeName, (route) => false);
@@ -62,12 +65,19 @@ class AuthClass {
 
         // storeTokenAndData(userCredential);
 
-        Navigator.pushNamed(context, VerifyEmail.routeName);
+        Navigator.pushNamed(context, VerifyEmail.routeName,
+            arguments: VerifyEmailArguments(email));
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           showSnackBar(context, 'Password should atleast be of 6 characters');
         } else if (e.code == 'email-already-in-use') {
-          showSnackBar(context, 'This email is already taken');
+          User? user = _auth.currentUser;
+          if (user != null && !user.emailVerified) {
+            showSnackBar(context,
+                'This email is already taken please login, (Email verification required)');
+          } else {
+            showSnackBar(context, 'This email is already taken');
+          }
         }
       } catch (e) {
         showSnackBar(context, e.toString());
@@ -125,9 +135,10 @@ class AuthClass {
       await _googleSignIn.signOut();
       await _auth.signOut();
       await storage.delete(key: "token");
+      Navigator.pushNamedAndRemoveUntil(
+          context, LoginScreen.routeName, (route) => false);
     } catch (e) {
-      final snackBar = SnackBar(content: Text(e.toString()));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      showSnackBar(context, e.toString());
     }
   }
 

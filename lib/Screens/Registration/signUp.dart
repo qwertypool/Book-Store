@@ -59,14 +59,16 @@ class SignUpScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: defaultPadding*1.5,),
+                  SizedBox(
+                    height: defaultPadding * 1.5,
+                  ),
                   SocialMediaRegistration(
                     size: size,
                     iconName: 'google.svg',
-                    socialName: 'Google',
+                    socialName: 'Sign Up with Google',
                     press: () {},
                   ),
-                  SizedBox(height: defaultPadding*1.5),
+                  SizedBox(height: defaultPadding * 1.5),
                   HaveAccountCheck(
                     text: 'Already',
                     routeName: LoginScreen.routeName,
@@ -128,7 +130,6 @@ class _SignUpFormState extends State<SignUpForm> {
       ),
     );
   }
-
 
   TextFormField buildConfirmPassFormField() {
     return TextFormField(
@@ -236,5 +237,3 @@ OutlineInputBorder outlineInputBorder() {
     gapPadding: 2,
   );
 }
-
-

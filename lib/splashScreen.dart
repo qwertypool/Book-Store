@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:book_store/Screens/Home/mainPage.dart';
 import 'package:book_store/Screens/Registration/signUp.dart';
+import 'package:book_store/Screens/Registration/verifyEmail.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'Authentication/firebase_authentication.dart';
 
@@ -21,13 +23,27 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   checkLogin() async {
-    String? token = await authClass.getToken();
-    if (token != null)
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null && user.emailVerified)
       Timer(Duration(seconds: 2),
           () => Navigator.pushNamed(context, MainPage.routeName));
-    else
-      Timer(Duration(seconds: 2),
-          () => Navigator.pushNamed(context, SignUpScreen.routeName));
+    else if (user != null && !user.emailVerified)
+      Timer(
+        Duration(seconds: 2),
+        () async {
+          // await user.sendEmailVerification();
+          Navigator.pushNamed(context, VerifyEmail.routeName,
+              arguments: VerifyEmailArguments(user.email!));
+        },
+      );
+    else {
+      Timer(
+        Duration(seconds: 2),
+        () async {
+          Navigator.pushNamed(context, SignUpScreen.routeName);
+        },
+      );
+    }
   }
 
   @override

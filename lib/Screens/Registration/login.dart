@@ -47,40 +47,42 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: size.height * 0.03,
                 ),
-                
+
                 Row(
-                    children: [
-                      Expanded(
-                        child: Divider(
-                          color: Colors.grey[600],
-                          height: 1.5,
-                        ),
+                  children: [
+                    Expanded(
+                      child: Divider(
+                        color: Colors.grey[600],
+                        height: 1.5,
                       ),
-                      Text(
-                        '  OR  ',
+                    ),
+                    Text(
+                      '  OR  ',
+                    ),
+                    Expanded(
+                      child: Divider(
+                        color: Colors.grey[600],
+                        height: 1.5,
                       ),
-                      Expanded(
-                        child: Divider(
-                          color: Colors.grey[600],
-                          height: 1.5,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: defaultPadding*1.5,),
-                  SocialMediaRegistration(
-                    size: size,
-                    iconName: 'google.svg',
-                    socialName: 'Google',
-                    press: () {},
-                  ),
-                  SizedBox(
-                  height: defaultPadding*1.5,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: defaultPadding * 1.5,
+                ),
+                SocialMediaRegistration(
+                  size: size,
+                  iconName: 'google.svg',
+                  socialName: 'Sign In with Google',
+                  press: () {},
+                ),
+                SizedBox(
+                  height: defaultPadding * 1.5,
                 ),
                 HaveAccountCheck(
-                   text: 'Dont',
-                    routeName: SignUpScreen.routeName,
-                    text2: 'Up',
+                  text: 'Dont',
+                  routeName: SignUpScreen.routeName,
+                  text2: 'Up',
                 ),
                 // Spacer(),
               ],
@@ -177,7 +179,7 @@ class _SignInFormState extends State<SignInForm> {
       decoration: InputDecoration(
         labelText: "Password",
         labelStyle: TextStyle(
-        fontWeight: FontWeight.w500, letterSpacing: 1.2, fontSize: 16),
+            fontWeight: FontWeight.w500, letterSpacing: 1.2, fontSize: 16),
         contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         enabledBorder: outlineInputBorder(),
         focusedBorder: outlineInputBorder(),
@@ -186,7 +188,10 @@ class _SignInFormState extends State<SignInForm> {
         suffixIcon: Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
           child: InkWell(
-            child: Icon(isVisible ? Icons.visibility : Icons.visibility_off,color: Colors.black.withOpacity(0.8),),
+            child: Icon(
+              isVisible ? Icons.visibility : Icons.visibility_off,
+              color: Colors.black.withOpacity(0.8),
+            ),
             onTap: () {
               setState(() {
                 isVisible = !isVisible;
@@ -211,7 +216,7 @@ class _SignInFormState extends State<SignInForm> {
       decoration: InputDecoration(
         labelText: "Email",
         labelStyle: TextStyle(
-        fontWeight: FontWeight.w500, letterSpacing: 1.2, fontSize: 16),
+            fontWeight: FontWeight.w500, letterSpacing: 1.2, fontSize: 16),
         contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         enabledBorder: outlineInputBorder(),
         focusedBorder: outlineInputBorder(),
@@ -219,14 +224,15 @@ class _SignInFormState extends State<SignInForm> {
         errorBorder: outlineInputBorder(),
         suffixIcon: Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-          child: Icon(Icons.email,color: Colors.black.withOpacity(0.8),),
+          child: Icon(
+            Icons.email,
+            color: Colors.black.withOpacity(0.8),
+          ),
         ),
       ),
     );
   }
 }
-
-
 
 OutlineInputBorder outlineInputBorder() {
   return OutlineInputBorder(
