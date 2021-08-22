@@ -35,7 +35,8 @@ dependencies:
   firebase_auth: ^3.0.1
   google_sign_in: ^5.0.7
   flutter_secure_storage: ^4.2.1
-
+  url_launcher: ^6.0.9
+  open_mail_app: ^0.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

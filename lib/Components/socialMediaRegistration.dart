@@ -13,7 +13,7 @@ class SocialMediaRegistration extends StatelessWidget {
 
   final Size size;
   final String? iconName;
-  final String? socialName;
+  final String socialName;
   final Function() press;
 
   @override
@@ -36,9 +36,9 @@ class SocialMediaRegistration extends StatelessWidget {
             width: defaultPadding,
           ),
           Text(
-            'Sign Up with $socialName',
+            socialName,
             style: TextStyle(
-              color:Colors.black,
+              color: Colors.black,
               fontSize: 18,
             ),
           )
