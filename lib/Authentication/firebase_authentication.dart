@@ -104,15 +104,12 @@ class AuthClass {
   Future<void> googleSignIn(BuildContext context) async {
     try {
       GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
-      print("worked till here 1");
-
       GoogleSignInAuthentication googleSignInAuthentication =
           await googleSignInAccount!.authentication;
       AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
-      print("worked till here");
       UserCredential userCredential =
           await _auth.signInWithCredential(credential);
       storeTokenAndData(userCredential);
