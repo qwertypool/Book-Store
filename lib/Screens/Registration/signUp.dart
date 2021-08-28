@@ -66,7 +66,9 @@ class SignUpScreen extends StatelessWidget {
                     size: size,
                     iconName: 'google.svg',
                     socialName: 'Sign Up with Google',
-                    press: () {},
+                    press: () {
+                      authClass.googleSignIn(context);
+                    },
                   ),
                   SizedBox(height: defaultPadding * 1.5),
                   HaveAccountCheck(

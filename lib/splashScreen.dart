@@ -27,7 +27,9 @@ class _SplashScreenState extends State<SplashScreen> {
     if (user != null && user.emailVerified)
       Timer(Duration(seconds: 2),
           () => Navigator.pushNamed(context, MainPage.routeName));
-    else if (user != null && !user.emailVerified)
+    else if (user != null &&
+        !user.emailVerified &&
+        user.providerData[0].providerId != "google.com")
       Timer(
         Duration(seconds: 2),
         () async {
@@ -36,6 +38,9 @@ class _SplashScreenState extends State<SplashScreen> {
               arguments: VerifyEmailArguments(user.email!));
         },
       );
+    else if (user != null && user.providerData[0].providerId == "google.com")
+      Timer(Duration(seconds: 2),
+          () => Navigator.pushNamed(context, MainPage.routeName));
     else {
       Timer(
         Duration(seconds: 2),
