@@ -9,12 +9,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthClass {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: [
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ],
-  );
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   final storage = new FlutterSecureStorage();
 
@@ -115,15 +110,11 @@ class AuthClass {
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
-      if (googleSignInAccount != null) {
-        UserCredential userCredential =
-            await _auth.signInWithCredential(credential);
-        storeTokenAndData(userCredential);
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MainPage()),
-        );
-      }
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
+      storeTokenAndData(userCredential);
+      Navigator.pushNamedAndRemoveUntil(
+          context, MainPage.routeName, (route) => false);
     } catch (e) {
       showSnackBar(context, e.toString());
     }
