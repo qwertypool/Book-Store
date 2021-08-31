@@ -33,14 +33,14 @@ class _MainPageState extends State<MainPage> {
           IconButton(
               onPressed: () {},
               icon: Icon(
-                Icons.notifications_outlined,
+                Icons.favorite_border_outlined,
                 color: Colors.black,
                 size: 25,
               )),
           IconButton(
               onPressed: () {},
               icon: Icon(
-                Icons.shopping_cart_outlined,
+                Icons.shopping_bag_outlined,
                 color: Colors.black,
                 size: 25,
               )),

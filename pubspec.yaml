@@ -31,6 +31,7 @@ dependencies:
   flutter_svg: ^0.22.0
   bottom_navy_bar: ^6.0.0
   carousel_slider: ^4.0.0
+  carousel_pro: ^1.0.0
   firebase_core: ^1.4.0
   firebase_auth: ^3.0.1
   google_sign_in: ^5.0.7

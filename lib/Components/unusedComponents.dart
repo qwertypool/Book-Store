@@ -77,3 +77,121 @@
 //     )),
 //   ),
 // ),
+
+//Container for card
+// Container(
+//                     child: Center(
+//                         child: Stack(
+//                           children: [
+//                             Container(
+//                               width: 1200,
+//                              // height : 120,
+//                               decoration:BoxDecoration(
+//                                 borderRadius: BorderRadius.circular(30),
+//                                 image: DecorationImage(
+//                                   image: AssetImage(item),
+//                                   fit: BoxFit.fitHeight,)),
+//                                   ),
+//                               //: Image.network(item, fit: BoxFit.cover, width: 1200)),
+//                             Align(
+//                               alignment: Alignment.bottomRight,
+//                               child: Padding(
+//                                 padding: const EdgeInsets.only(right: 10,bottom: 6),
+//                                 child: ClipRect(
+
+//                                   child: BackdropFilter(
+//                                     filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+//                                     child: Container(
+//                                       width: 120,
+//                                       height: 30,
+//                                       decoration: BoxDecoration(
+//                                       borderRadius: BorderRadius.circular(20),
+//                                       color: Colors.grey.withOpacity(0.5),
+//                                     ),
+//                                     child: Row(
+//                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                                       children: [
+//                                         Text('Shop Now',style: TextStyle(color: Colors.white,fontFamily: 'Ubuntu',letterSpacing: 2,fontWeight: FontWeight.w600),),
+//                                         Icon(Icons.arrow_forward_ios,color: Colors.white,size: 15,),
+//                                       ],
+//                                     ),
+//                                     ),
+                                
+//                                   ),
+//                                 ),
+//                               ),
+//                             )
+//                           ],
+//                         )),
+//                   ),
+
+
+
+
+// Products cart->
+// Container(
+//                width: size.width*0.6,
+//                height: 300,
+//                child: Card(
+//                  elevation: 10,
+//                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+//                  child: Column(
+//                    children: [
+//                      Expanded(
+//                        flex: 5,
+//                       child: Image.network('https://i.pinimg.com/originals/12/e7/30/12e730237d6426796848c8a9d4cadf2a.png'),
+//                         ),
+//                     Expanded(
+//                        flex: 2,
+//                       child: Column(
+//                         children: [
+//                           Padding(
+//                             padding: const EdgeInsets.symmetric(horizontal: 10),
+//                             child: Text('Harry Potter edition ',textAlign: TextAlign.center,maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16,),),
+//                           ),
+//                           SizedBox(height: defaultPadding*0.5,),
+//                           Padding(
+//                             padding: const EdgeInsets.symmetric(horizontal: 14),
+//                             child: Row(
+//                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                               children: [
+//                               Text('₹400',style: TextStyle(color: kPrimaryColor,fontSize: 17,fontWeight:FontWeight.bold,),),
+//                               Text('₹800',style: TextStyle(color: kSecondaryColor,fontSize: 15,fontWeight:FontWeight.w500,decoration: TextDecoration.lineThrough),),
+//                               Text('50% Off',style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 15)),
+//                               ],
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+
+//                     ),
+//                     Expanded(
+//                       flex: 1,
+//                       child: Row(
+//                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                             children: [
+//                               Expanded(
+//                                 flex: 1,
+//                                 child: IconButton(onPressed: (){}, icon: Icon(Icons.favorite_border_outlined,size: 30,color: kPrimaryColor,),)),
+//                               Expanded(
+//                                 flex: 2,
+//                                 child: RawMaterialButton(
+//                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomRight: Radius.circular(10),topLeft: Radius.circular(10))),
+//                                   onPressed: (){},
+//                                   fillColor: kPrimaryColor,
+//                                   splashColor: kSecondaryColor,
+//                                   child: Row(
+//                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                                     children: [
+//                                       Icon(Icons.shopping_cart_outlined,color: Colors.white,),
+//                                       Text('Add to cart',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),)
+//                                     ],
+//                                   ),
+//                                 )),
+//                             ],
+//                           )
+//                     )
+//                    ],
+//                  ),
+//                ),
+//              )
