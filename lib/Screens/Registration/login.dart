@@ -8,6 +8,8 @@ import 'package:flutter/rendering.dart';
 import '../../constantParameters.dart';
 import 'forgotPassword.dart';
 
+AuthClass authClass = AuthClass();
+
 class LoginScreen extends StatefulWidget {
   static String routeName = "/loginScreen";
   LoginScreen({Key? key}) : super(key: key);
@@ -74,7 +76,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   size: size,
                   iconName: 'google.svg',
                   socialName: 'Sign In with Google',
-                  press: () {},
+                  press: () {
+                    authClass.googleSignIn(context);
+                  },
                 ),
                 SizedBox(
                   height: defaultPadding * 1.5,
