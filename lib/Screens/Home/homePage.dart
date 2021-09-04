@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:book_store/Components/productCard.dart';
 import 'package:book_store/constantParameters.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -144,7 +145,7 @@ class HomePage extends StatelessWidget {
               ),
               SizedBox(height: defaultPadding,),
               Container(
-                height: 300,
+                height: 350,
                 child: ListView.builder(
                   padding: EdgeInsets.symmetric(horizontal: defaultPadding,),
                   scrollDirection: Axis.horizontal,
@@ -195,94 +196,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class ProductCard extends StatelessWidget {
-  const ProductCard({
-    Key? key,
-    required this.size,
-    required this.bookCoverImage,
-    required this.bookname,
-    required this.bookdiscountedPrice,
-    required this.originalprice,
-    required this.offerPercentage,
-  }) : super(key: key);
 
-  final Size size;
-  final String? bookCoverImage;
-  final String? bookname;
-  final String? bookdiscountedPrice;
-  final String? originalprice;
-  final String? offerPercentage;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: size.width*0.6,
-      height: 300,
-      child: Card(
-        elevation: 10,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        child: Column(
-          children: [
-            Expanded(
-              flex: 5,
-             child: Image.network(bookCoverImage!),
-               ),
-           Expanded(
-              flex: 2,
-             child: Column(
-               children: [
-                 Padding(
-                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                   child: Text(bookname!,textAlign: TextAlign.center,maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16,),),
-                 ),
-                 SizedBox(height: defaultPadding*0.5,),
-                 Padding(
-                   padding: const EdgeInsets.symmetric(horizontal: 14),
-                   child: Row(
-                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                     children: [
-                     Text('₹$bookdiscountedPrice',style: TextStyle(color: kPrimaryColor,fontSize: 17,fontWeight:FontWeight.bold,),),
-                     Text('₹$originalprice',style: TextStyle(color: kSecondaryColor,fontSize: 13,fontWeight:FontWeight.w500,decoration: TextDecoration.lineThrough),),
-                     Text('$offerPercentage %Off',style:TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 14)),
-                     ],
-                   ),
-                 ),
-               ],
-             ),
-
-           ),
-           Expanded(
-             flex: 1,
-             child: Row(
-                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                   children: [
-                     Expanded(
-                       flex: 1,
-                       child: IconButton(onPressed: (){}, icon: Icon(Icons.favorite_border_outlined,size: 25,color: kPrimaryColor,),)),
-                     Expanded(
-                       flex: 2,
-                       child: RawMaterialButton(
-                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomRight: Radius.circular(10),topLeft: Radius.circular(10))),
-                         onPressed: (){},
-                         fillColor: kPrimaryColor,
-                         splashColor: kSecondaryColor,
-                         child: Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                           children: [
-                             Icon(Icons.shopping_cart_outlined,color: Colors.white,),
-                             Text('Add to cart',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),)
-                           ],
-                         ),
-                       )),
-                   ],
-                 )
-           )
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 class ImageSliderDemo extends StatefulWidget {
   @override
