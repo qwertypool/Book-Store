@@ -3,6 +3,8 @@ import 'package:book_store/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'Screens/PersonalDetails/GetData.dart';
+import 'Screens/PersonalDetails/testScreen.dart';
 import 'Screens/Registration/verifyEmail.dart';
 import 'theme.dart';
 
@@ -19,9 +21,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Book Store',
       theme: theme(),
-      //home: VerifyEmail()
-      initialRoute: SplashScreen.routeName,
-      routes: routes,
+      // home: AddUser("ok", "ok", 123),
+      home: UserInformation(),
+      // initialRoute: SplashScreen.routeName,
+      // routes: routes,
     );
   }
 }

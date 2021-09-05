@@ -120,8 +120,7 @@ class AuthClass {
     }
   }
 
-
-Future<String?> googleSignIn1(BuildContext context) async {
+  Future<String?> googleSignIn1(BuildContext context) async {
     try {
       final GoogleSignInAccount? googleSignInAccount =
           await _googleSignIn.signIn();
@@ -133,16 +132,13 @@ Future<String?> googleSignIn1(BuildContext context) async {
       );
       await _auth.signInWithCredential(credential);
       Navigator.pushNamedAndRemoveUntil(
-      context, MainPage.routeName, (route) => false);
-      
+          context, MainPage.routeName, (route) => false);
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.toString());
       print(e.message);
       throw e;
     }
   }
-
-
 
   //Sign Out
   Future<void> signOut({required BuildContext context}) async {

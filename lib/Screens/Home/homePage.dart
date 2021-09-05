@@ -27,213 +27,213 @@ class _HomePageState extends State<HomePage> {
     String? offerPercentage = '50';
     return Scaffold(
       body: SingleChildScrollView(
-              child: Container(
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    SizedBox(height: defaultPadding),
-                    searchBox(size),
-                    SizedBox(height: defaultPadding * 1.2),
-                    ImageSliderDemo(),
-                    SizedBox(height: defaultPadding * 1.2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: defaultPadding * 1.5),
-                          child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'Best Offers',
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 23,
-                                    color: Colors.black),
-                              )),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Text(
-                            'See all',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 15,
-                                color: Colors.grey[800]),
-                          ),
-                        ),
-                        SizedBox()
-                      ],
+        child: Container(
+          width: double.infinity,
+          child: Column(
+            children: [
+              SizedBox(height: defaultPadding),
+              searchBox(size),
+              SizedBox(height: defaultPadding * 1.2),
+              ImageSliderDemo(),
+              SizedBox(height: defaultPadding * 1.2),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: defaultPadding * 1.5),
+                    child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'Best Offers',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 23,
+                              color: Colors.black),
+                        )),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      'See all',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                          color: Colors.grey[800]),
                     ),
-                    SizedBox(
-                      height: defaultPadding,
-                    ),
-                    Container(
-                      height: 300,
-                      // child: ListView(
-                      //   children: snapshot.data!.docs
-                      //       .map((DocumentSnapshot document) {
-                      //     Map<String, dynamic> data =
-                      //         document.data()! as Map<String, dynamic>;
-                      //     return ProductCard(
-                      //         size: size,
-                      //         bookCoverImage: data['images'][0],
-                      //         bookname: bookname,
-                      //         bookdiscountedPrice: bookdiscountedPrice,
-                      //         originalprice: originalprice,
-                      //         offerPercentage: offerPercentage);
-                      //   }).toList(),
-                      // ),
-                      child: StreamBuilder<QuerySnapshot>(
-                         stream: FirebaseFirestore.instance.collection('products').snapshots(),
-                        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                          if (snapshot.hasError) {
-                            return Center(
-                              child: Text(snapshot.error.toString()),
-                            );
-                          }
-                          if (!snapshot.hasData) {
-                            return const Center(child: CircularProgressIndicator());
-                          }
-                        final data = snapshot.requireData;
-                        return ListView.builder(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: defaultPadding,
-                          ),
-                          scrollDirection: Axis.horizontal,
-                          itemCount: snapshot.data!.docs.length,
-                          itemBuilder: (context, index) {
-                            return ProductCard(
-                                size: size,
-                                bookCoverImage: bookCoverImage,
-                                bookname: data.docs[index].get('name_e'),
-                                bookdiscountedPrice: bookdiscountedPrice,
-                                originalprice: originalprice,
-                                offerPercentage: offerPercentage
-                            );
-                          },
-                        );
+                  ),
+                  SizedBox()
+                ],
+              ),
+              SizedBox(
+                height: defaultPadding,
+              ),
+              Container(
+                height: 300,
+                // child: ListView(
+                //   children: snapshot.data!.docs
+                //       .map((DocumentSnapshot document) {
+                //     Map<String, dynamic> data =
+                //         document.data()! as Map<String, dynamic>;
+                //     return ProductCard(
+                //         size: size,
+                //         bookCoverImage: data['images'][0],
+                //         bookname: bookname,
+                //         bookdiscountedPrice: bookdiscountedPrice,
+                //         originalprice: originalprice,
+                //         offerPercentage: offerPercentage);
+                //   }).toList(),
+                // ),
+                child: StreamBuilder<QuerySnapshot>(
+                  stream:
+                      FirebaseFirestore.instance.collection('Todo').snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text(snapshot.error.toString()),
+                      );
+                    }
+                    if (!snapshot.hasData) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    final data = snapshot.requireData;
+                    return ListView.builder(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: defaultPadding,
+                      ),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        return ProductCard(
+                            size: size,
+                            bookCoverImage: bookCoverImage,
+                            bookname: data.docs[index].get('name_e'),
+                            bookdiscountedPrice: bookdiscountedPrice,
+                            originalprice: originalprice,
+                            offerPercentage: offerPercentage);
                       },
-                    ),
-                     
-                    ),
-                      
-                    SizedBox(height: defaultPadding * 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: defaultPadding * 1.5),
-                          child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'New Arrivals',
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 23,
-                                    color: Colors.black),
-                              )),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Text(
-                            'See all',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 15,
-                                color: Colors.grey[800]),
-                          ),
-                        ),
-                        SizedBox()
-                      ],
-                    ),
-                    SizedBox(
-                      height: defaultPadding,
-                    ),
-                    Container(
-                      height: 300,
-                      child: ListView.builder(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: defaultPadding,
-                        ),
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 8,
-                        itemBuilder: (context, index) {
-                          return ProductCard(
-                              size: size,
-                              bookCoverImage: bookCoverImage,
-                              bookname: bookname,
-                              bookdiscountedPrice: bookdiscountedPrice,
-                              originalprice: originalprice,
-                              offerPercentage: offerPercentage);
-                        },
-                      ),
-                    ),
-                    SizedBox(height: defaultPadding * 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: defaultPadding * 1.5),
-                          child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'Best Sellers',
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 23,
-                                    color: Colors.black),
-                              )),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Text(
-                            'See all',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 15,
-                                color: Colors.grey[800]),
-                          ),
-                        ),
-                        SizedBox()
-                      ],
-                    ),
-                    SizedBox(
-                      height: defaultPadding,
-                    ),
-                    Container(
-                      height: 350,
-                      child: ListView.builder(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: defaultPadding,
-                        ),
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 8,
-                        itemBuilder: (context, index) {
-                          return ProductCard(
-                              size: size,
-                              bookCoverImage: bookCoverImage,
-                              bookname: bookname,
-                              bookdiscountedPrice: bookdiscountedPrice,
-                              originalprice: originalprice,
-                              offerPercentage: offerPercentage);
-                        },
-                      ),
-                    ),
-
-                    //SizedBox(height:defaultPadding*2),
-                  ],
+                    );
+                  },
                 ),
               ),
-            ),
-        //  } //switch
-        //  },//builder
-        //  ), streambuilder
+
+              SizedBox(height: defaultPadding * 2),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: defaultPadding * 1.5),
+                    child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'New Arrivals',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 23,
+                              color: Colors.black),
+                        )),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      'See all',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                          color: Colors.grey[800]),
+                    ),
+                  ),
+                  SizedBox()
+                ],
+              ),
+              SizedBox(
+                height: defaultPadding,
+              ),
+              Container(
+                height: 300,
+                child: ListView.builder(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: defaultPadding,
+                  ),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 8,
+                  itemBuilder: (context, index) {
+                    return ProductCard(
+                        size: size,
+                        bookCoverImage: bookCoverImage,
+                        bookname: bookname,
+                        bookdiscountedPrice: bookdiscountedPrice,
+                        originalprice: originalprice,
+                        offerPercentage: offerPercentage);
+                  },
+                ),
+              ),
+              SizedBox(height: defaultPadding * 2),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: defaultPadding * 1.5),
+                    child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'Best Sellers',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 23,
+                              color: Colors.black),
+                        )),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      'See all',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                          color: Colors.grey[800]),
+                    ),
+                  ),
+                  SizedBox()
+                ],
+              ),
+              SizedBox(
+                height: defaultPadding,
+              ),
+              Container(
+                height: 350,
+                child: ListView.builder(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: defaultPadding,
+                  ),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 8,
+                  itemBuilder: (context, index) {
+                    return ProductCard(
+                        size: size,
+                        bookCoverImage: bookCoverImage,
+                        bookname: bookname,
+                        bookdiscountedPrice: bookdiscountedPrice,
+                        originalprice: originalprice,
+                        offerPercentage: offerPercentage);
+                  },
+                ),
+              ),
+
+              //SizedBox(height:defaultPadding*2),
+            ],
+          ),
+        ),
+      ),
+      //  } //switch
+      //  },//builder
+      //  ), streambuilder
     );
   }
 

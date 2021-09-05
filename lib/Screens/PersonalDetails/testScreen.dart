@@ -14,7 +14,7 @@ class AddUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Create a CollectionReference called users that references the firestore collection
-    CollectionReference users = FirebaseFirestore.instance.collection('test');
+    CollectionReference users = FirebaseFirestore.instance.collection('Todo');
 
     Future<void> addUser() {
       // Call the user's CollectionReference to add a new user
@@ -29,7 +29,14 @@ class AddUser extends StatelessWidget {
     }
 
     return TextButton(
-      onPressed: addUser,
+      onPressed: () {
+        FirebaseFirestore.instance.collection("Todo").add({
+          "ttile": "Hey there",
+          "task": "Planned",
+          "Category": "ok",
+          "description": "Testing tamil books"
+        });
+      },
       child: Text(
         "Add User",
       ),
