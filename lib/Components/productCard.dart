@@ -7,7 +7,7 @@ class ProductCard extends StatelessWidget {
    ProductCard({
     Key? key,
     required this.size,
-    required this.bookCoverImage,
+    this.bookCoverImage,
     required this.bookname,
     required this.bookdiscountedPrice,
     required this.originalprice,

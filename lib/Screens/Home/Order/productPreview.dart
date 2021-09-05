@@ -176,6 +176,21 @@ class _ProductPreviewState extends State<ProductPreview> {
                     Row(
                       children: [
                         Text('Tags  : ',style: TextStyle(fontWeight: FontWeight.bold,color: kPrimaryColor,fontSize: 15),),
+                        // Chip(
+                        //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        //   label:Text(
+                        //         'Novels',
+                        //         style: TextStyle(
+                        //           color: Colors.white,
+                        //           fontSize: 10
+                        //         ),
+                        //       ),
+                        //     //labelPadding: EdgeInsets.all(1.0),
+                        //     backgroundColor: Colors.grey[800],
+                        //     elevation: 6.0,
+                        //     shadowColor: Colors.grey[60],
+                        //     padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 0)
+                        // ),
                         Text('Fantacy Novels ',style: TextStyle(fontWeight: FontWeight.w500,color: Colors.black,fontSize: 14),),
                       ],
                     ),

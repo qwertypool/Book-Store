@@ -4,6 +4,7 @@ import 'package:book_store/Screens/Home/chatPage.dart';
 import 'package:book_store/Screens/Home/explorePage.dart';
 import 'package:book_store/Screens/Home/Order/ordersPage.dart';
 import 'package:book_store/Screens/PersonalDetails/favourites.dart';
+import 'package:book_store/Screens/PersonalDetails/testScreen.dart';
 import 'package:book_store/constantParameters.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,9 @@ class _MainPageState extends State<MainPage> {
                 size: 25,
               )),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AddUser('deepa','tcs',1500)));
+              },
               icon: Icon(
                 Icons.shopping_bag_outlined,
                 color: Colors.black,
