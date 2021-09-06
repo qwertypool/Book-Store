@@ -1,3 +1,4 @@
+import 'package:book_store/Components/productCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -7,9 +8,18 @@ class UserInformation extends StatefulWidget {
 }
 
 class _UserInformationState extends State<UserInformation> {
-  final Stream<QuerySnapshot> _usersStream =
-      FirebaseFirestore.instance.collection('Todo').snapshots();
-
+  //   Stream<QuerySnapshot> queryStream(BuildContext context) async* {
+  //   yield* FirebaseFirestore.instance
+  //       .collection('products')
+  //       .limit(2)
+  //       .orderBy('bookname')
+  //       .snapshots();
+  // }
+  final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
+      .collection('Books')
+      .limit(4)
+      .orderBy('bookname')
+      .snapshots();
   // @override
   // void initState() {
   //   // TODO: implement initState
@@ -22,6 +32,7 @@ class _UserInformationState extends State<UserInformation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: StreamBuilder<QuerySnapshot>(
         stream: _usersStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -38,9 +49,13 @@ class _UserInformationState extends State<UserInformation> {
               itemBuilder: (context, index) {
                 Map<String, dynamic> data =
                     snapshot.data!.docs[index].data()! as Map<String, dynamic>;
-                return ListTile(
-                  title: Text(data['Category']),
-                  subtitle: Text(data["task"]),
+                return ProductCard(
+                    size: MediaQuery.of(context).size,
+                    bookCoverImage: data['bookCoverImage'],
+                    bookname: data['bookname'],
+                    bookdiscountedPrice: data['bookdiscountedPrice'].toString(),
+                    originalprice: data['originalprice'].toString(),
+                    offerPercentage: data['offerPercentage'].toString()
                 );
               });
         },

@@ -86,34 +86,36 @@ class _HomePageState extends State<HomePage> {
                 //   }).toList(),
                 // ),
                 child: StreamBuilder<QuerySnapshot>(
-                  stream:
-                      FirebaseFirestore.instance.collection('Todo').snapshots(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                  stream: FirebaseFirestore.instance.collection('Books').limit(3).orderBy('bookname').snapshots(),
+                          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.hasError) {
-                      return Center(
-                        child: Text(snapshot.error.toString()),
-                      );
+                      return Text('Something went wrong');
                     }
-                    if (!snapshot.hasData) {
-                      return const Center(child: CircularProgressIndicator());
+
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Text("Loading");
                     }
-                    final data = snapshot.requireData;
-                    return ListView.builder(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: defaultPadding,
-                      ),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        return ProductCard(
-                            size: size,
-                            bookCoverImage: bookCoverImage,
-                            bookname: data.docs[index].get('name_e'),
-                            bookdiscountedPrice: bookdiscountedPrice,
-                            originalprice: originalprice,
-                            offerPercentage: offerPercentage);
-                      },
+
+                    return Container(
+                      height: 340,
+                      child: ListView.builder(
+                          itemCount: snapshot.data!.docs.length,
+                          padding: EdgeInsets.symmetric(
+                          horizontal: defaultPadding,
+                          ),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            Map<String, dynamic> data =
+                                snapshot.data!.docs[index].data()! as Map<String, dynamic>;
+                            return ProductCard(
+                                size: size,
+                                bookCoverImage: data['bookCoverImage'],
+                                bookname: data['bookname'],
+                                bookdiscountedPrice: data['bookdiscountedPrice'].toString(),
+                                originalprice: data['originalprice'].toString(),
+                                offerPercentage: data['offerPercentage'].toString()
+                            );
+                          }),
                     );
                   },
                 ),
@@ -308,10 +310,11 @@ class _ImageSliderDemoState extends State<ImageSliderDemo> {
               autoPlayAnimationDuration: Duration(milliseconds: 600),
               viewportFraction: 0.8,
               onPageChanged: (index, reason) {
-                setState(() {
-                  _current = index;
-                });
-              }),
+                // setState(() {
+                //   _current = index;
+                // });
+              }
+            ),
           items: imgList
               .map(
                 (item) => Container(

@@ -49,7 +49,7 @@ class ProductCard extends StatelessWidget {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                         child: Text(
                           bookname!,
                           textAlign: TextAlign.center,
@@ -63,12 +63,12 @@ class ProductCard extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: defaultPadding * 0.5,
+                        height: defaultPadding * 0.2,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 14),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               '₹$bookdiscountedPrice',
@@ -78,6 +78,7 @@ class ProductCard extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
+                            SizedBox(width: 8,),
                             Text(
                               '₹$originalprice',
                               style: TextStyle(
@@ -86,6 +87,7 @@ class ProductCard extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                   decoration: TextDecoration.lineThrough),
                             ),
+                            Text(' | ',style: TextStyle(color: Colors.grey[300],fontSize: 21,),),
                             Text('$offerPercentage %Off',
                                 style: TextStyle(
                                     color: Colors.black,
@@ -94,25 +96,25 @@ class ProductCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: RatingBar.builder(
-                          initialRating: 4.5,
-                          minRating: 1,
-                          direction: Axis.horizontal,
-                          allowHalfRating: true,
-                          itemCount: 5,
-                          itemSize: 18,
-                          itemBuilder: (context, _) => Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                            size: 10,
-                          ),
-                          onRatingUpdate: (rating) {
-                            print(rating);
-                          },
-                        ),
-                      ),
+                      // Align(
+                      //   alignment: Alignment.topCenter,
+                      //   child: RatingBar.builder(
+                      //     initialRating: 4.5,
+                      //     minRating: 1,
+                      //     direction: Axis.horizontal,
+                      //     allowHalfRating: true,
+                      //     itemCount: 5,
+                      //     itemSize: 18,
+                      //     itemBuilder: (context, _) => Icon(
+                      //       Icons.star,
+                      //       color: Colors.amber,
+                      //       size: 10,
+                      //     ),
+                      //     onRatingUpdate: (rating) {
+                      //       print(rating);
+                      //     },
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

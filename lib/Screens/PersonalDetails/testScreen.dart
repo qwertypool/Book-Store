@@ -1,44 +1,41 @@
 import 'package:flutter/material.dart';
-
-// Import the firebase_core and cloud_firestore plugin
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddUser extends StatelessWidget {
-  final String name;
-  final String company;
-  final int price;
-
-  AddUser(this.name, this.company, this.price);
-
   @override
   Widget build(BuildContext context) {
     // Create a CollectionReference called users that references the firestore collection
-    CollectionReference users = FirebaseFirestore.instance.collection('Todo');
+    CollectionReference users = FirebaseFirestore.instance.collection('Books');
 
-    Future<void> addUser() {
-      // Call the user's CollectionReference to add a new user
-      return users
-          .add({
-            'name': name, // John Doe
-            'company': company, // Stokes and Sons
-            'price': price // 42
-          })
-          .then((value) => print("User Added"))
-          .catchError((error) => print("Failed to add user: $error"));
-    }
+    // Future<void> addUser() {
+    //   // Call the user's CollectionReference to add a new user
+    //   return users
+    //       .add({
+    //         'name': name, // John Doe
+    //         'company': company, // Stokes and Sons
+    //         'price': price // 42
+    //       })
+    //       .then((value) => print("User Added"))
+    //       .catchError((error) => print("Failed to add user: $error"));
+    // }
 
-    return TextButton(
-      onPressed: () {
-        FirebaseFirestore.instance.collection("Todo").add({
-          "ttile": "Hey there",
-          "task": "Planned",
-          "Category": "ok",
-          "description": "Testing tamil books"
-        });
-      },
-      child: Text(
-        "Add User",
+    return Scaffold(
+      body: TextButton(
+        onPressed: () {
+          FirebaseFirestore.instance.collection("Books").add({
+            "bookname": "The Monkey's Paw",
+            'bookCoverImage':'https://i.redd.it/vqnx74b1v7o61.jpg',
+            'bookdiscountedPrice': 540,
+            'originalprice': 600,
+            'offerPercentage': 10
+          });
+          print("user added succesfully");
+        },
+        child: Center(
+          child: Text(
+            "Add Books",
+          ),
+        ),
       ),
     );
   }
